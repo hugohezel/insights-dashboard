@@ -15,6 +15,9 @@ const ZeroStateFooter = ({
     appName,
     documentation = zeroStateConstants[`${appName.toUpperCase()}_ZERO_STATE`].documentation
 }) => {
+    // Remediation plans requires a specific documentation title
+    // https://issues.redhat.com/browse/RHINENG-19699
+    const documentationTitleText = appName === 'Remediation_plans' ? 'Documentation' : `${appName.replace('_', ' ')} documentation`;
     return (
         <PageSection className='footer' isWidthLimited>
             <Card>
@@ -22,7 +25,7 @@ const ZeroStateFooter = ({
                     <GridItem>
                         <Flex direction={{ default: 'column' }}>
                             <FlexItem>
-                                <Title headingLevel='h3' size='lg'>{appName.replace('_', ' ')} documentation</Title>
+                                <Title headingLevel='h3' size='lg'>{documentationTitleText}</Title>
                             </FlexItem>
                             {documentation.map(item => (
                                 <FlexItem key={item.title} >
